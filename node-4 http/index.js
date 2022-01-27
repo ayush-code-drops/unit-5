@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
         
     }
     catch {
-        console.log("error")
+        console.log(" some error")
         res.writeHead(501)
         res.end("Error")
     }
