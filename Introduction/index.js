@@ -5,6 +5,7 @@ console.log(sum(5, 10))
 
 const server=http.createServer((req, res) => {
     try {
+        console.log("url",req.url,req.method)
        res.writeHead(200)
     res.end("Hello World")
     }
