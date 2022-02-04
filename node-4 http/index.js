@@ -4,8 +4,8 @@ const { getAllUsers, getUser,addUser } = require('./app/user/api/users.js');
 
 const server = http.createServer((req, res) => {
     try {
-
-        if (req.url === "/users") {
+        const [url,query]=req.url.split("?")
+        if (req.url === "/users"&&req.method=="GET") {
             res.writeHead(200)
         res.end(JSON.stringify(getAllUsers()))
         }
@@ -16,11 +16,16 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify(getUser(id)))
         }
        // console.log(req.url, req.method)
-        else if (req.url.startsWith('/users?name=')&&req.method=="POST") {
-            const name = req.url.split("=")[1]
-            console.log(name)
+        else if (req.method=="POST") {
+          //  const name = req.url.split("=")[1]
+         // const url = 'https://localhost:3002/users?'
+            console.log(url,query)
+          const search = new URLSearchParams(query)
+          const q = search.get('name')
+          console.log('q',q)
+          //  console.log(name)
             res.writeHead(201)
-            res.end(JSON.stringify(addUser(name)))
+            res.end(JSON.stringify(addUser(q)))
         }
         
     }
